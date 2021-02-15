@@ -7,3 +7,7 @@ Default backup location is on C:\User\username\Documents\_VALHEIM-CRASH-SAVER\
 - create scheduled task for periodical backups
 - optimization
 - farm more iron
+
+## HOW TO USE
+1. Download script
+2. Right-click --> Run with PowerShell
