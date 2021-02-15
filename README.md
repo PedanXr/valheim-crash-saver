@@ -4,6 +4,6 @@ Save your precious files from crashes
 Default backup location is on C:\User\username\Documents\_VALHEIM-CRASH-SAVER\
 
 ## TODO
-- play more Valheim
-- farm more iron
+- create scheduled task for periodical backups
 - optimization
+- farm more iron
