@@ -5,6 +5,7 @@ Default backup location is on C:\User\username\Documents\_VALHEIM-CRASH-SAVER\
 
 ## TODO
 - create scheduled task for periodical backups
+- Include Linux builds
 - optimization
 - farm more iron
 
