@@ -2,7 +2,7 @@
 #
 # Newest version @ https://github.com/PedanXr/valheim-crash-saver/
 #
-# This script creates a backup of your world and character files on every boot
+# This script creates a backup of your world and character files periodically or on every boot
 
 #### VARIABLES ####
 # Edit these to control this script
@@ -14,6 +14,10 @@ $CharSave = $true
 $BackupPath = "$env:USERPROFILE\Documents\_VALHEIM-CRASH-SAVER\"
 # How many backups should be kept?
 $BackupSets = 50
+# Whether the script should continue running and save periodically. False means one-shot.
+$RunLoop = $true
+# How many seconds it should sleep between saves
+$SaveInterval = 600
 ##############
 
 # DO NOT EDIT ANYTHING BELOW THIS LINE
@@ -46,14 +50,24 @@ $date = Get-Date
 $dateStr = $date.ToString("yyyy-MM-dd_HH-mm")
 
 New-BackupPath
-Set-BackupSets -path $BackupPath -sets $BackupSets
 
-if ($CharSave -eq $true) {
-    $targetFile = $BackupPath+'Character-'+$dateStr+'.zip'
-    [io.compression.zipfile]::CreateFromDirectory($CharSource, $targetFile)
-}
+do {
+    Set-BackupSets -path $BackupPath -sets $BackupSets
 
-if ($WorldSave -eq $true) {
-    $targetFile = $BackupPath+'Worlds-'+$dateStr+'.zip'
-    [io.compression.zipfile]::CreateFromDirectory($WorldSource, $targetFile)
-}
+    $dateStr = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+
+    if ($CharSave -eq $true) {
+        $targetFile = $BackupPath+'Character-'+$dateStr+'.zip'
+        [io.compression.zipfile]::CreateFromDirectory($CharSource, $targetFile)
+        "Wrote character save '$targetFile'"
+    }
+
+    if ($WorldSave -eq $true) {
+        $targetFile = $BackupPath+'Worlds-'+$dateStr+'.zip'
+        [io.compression.zipfile]::CreateFromDirectory($WorldSource, $targetFile)
+        "Wrote world save '$targetFile'"
+    }
+    if ($RunLoop) {
+        sleep $SaveInterval
+    }
+} while ($RunLoop)
