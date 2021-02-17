@@ -24,6 +24,9 @@ Default backup location is on `C:\User\username\Documents\_VALHEIM-CRASH-SAVER\`
 6. `$SaveInterval = 600`
    * Intervall of saves in seconds. Defaults to 10 minutes.
 
+7. `$RunGame = $true`
+   * Start game via steam. Defaults to $true.
+
 
 ### TODO
 - Create option to install the script as a service
