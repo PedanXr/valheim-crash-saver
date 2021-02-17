@@ -18,6 +18,8 @@ $BackupSets = 50
 $RunLoop = $true
 # How many seconds it should sleep between saves
 $SaveInterval = 600
+# Should this script start the game?
+$RunGame = $true
 ##############
 
 # DO NOT EDIT ANYTHING BELOW THIS LINE
@@ -41,6 +43,11 @@ Function Set-BackupSets ($path, $sets) {
             $findfiles | Sort-Object LastWriteTime -Descending | Select-Object -Last ($findfiles.Count - $sets) | Out-Host #Remove-Item
         }
     }
+}
+
+if ($RunGame -eq $true) {
+    Write-Host "Starting Game"
+    explorer.exe "steam://rungameid/892970"
 }
 
 Add-Type -assembly "system.io.compression.filesystem"
